@@ -1,0 +1,180 @@
+html { scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+body {
+    background-color: #0a0000;
+    background: linear-gradient(to bottom, #000, #1a0000, #0a0000);
+    background-attachment: fixed;;
+    color: #f8f8f8;
+    font-family: "Trebuchet MS", sans-serif;
+    line-height: 1.6;
+    z-index: 0;
+    position: relative;
+}
+header {
+    background: linear-gradient(to bottom, rgba(26, 0, 0, 0.95), rgba(0, 0, 0, 0.75));
+    padding: 1rem 1rem;
+    text-align: center;
+    border-bottom: 2px solid #400000;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(2px);
+    z-index: 2;
+}
+header h1 {
+    color: #ff1a1a;
+    text-shadow: 3px 3px 20px #ff0080;
+    letter-spacing: 20px;
+    animation: flicker 3s infinite;
+    filter: brightness(1.2) contrast(1.1);
+}
+header p {
+    color: #ff1a1a;
+    margin-top: 0.5rem;
+    text-shadow: 2px 2px 10px #f8f8f8;
+}
+section {
+    padding: 5rem 1rem;
+    border-top: none;
+    margin: 0;
+}
+footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid #330000;
+    color: #999;
+    z-index: 2;
+}
+#LIMBO {
+    background: linear-gradient(to bottom, #050000, #200000);
+}
+#LUST {
+    background: linear-gradient(to bottom, #200000, #400000);
+}
+#GLUTTONY {
+    background: linear-gradient(to bottom, #400000, #600000);
+}
+#GREED {
+    background: linear-gradient(to bottom, #600000, #800000);
+}
+#ANGER {
+    background: linear-gradient(to bottom, #800000, #990000);
+}
+#HERESY {
+    background: linear-gradient(to bottom, #990000, #b30000);
+}
+#VIOLENCE {
+    background: linear-gradient(to bottom, #b30000, #cc0000);
+}
+#FRAUD {
+    background: linear-gradient(to bottom, #cc0000, #e60000);
+}
+#TREACHERY {
+    background: linear-gradient(to bottom, #e60000, #ffbb00);
+}
+nav ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+nav li {
+    margin: 0 10px;
+    display: inline-block;
+}
+nav a {
+    text-decoration: none;
+    color: #ff4d4d;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color .2s ease, text-shadow .2s ease, transform .15s ease;
+    
+}
+nav a:hover{
+    color: #fff;
+    text-shadow: 0 0 12px #ff0000cc, 0 0 24px #ff000066;
+    transform: translateY(-1px);
+}
+nav a.active {
+    color: #ffffff;
+    text-shadow: 0 0 16px #ff0000, 0 0 32px #ff000088;
+    border-bottom: 2px solid #ff0000;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(255,0,0,0.05), transparent 70%),
+              radial-gradient(circle at bottom, rgba(255,0,0,0.1), transparent 70%);
+  pointer-events: none;
+}
+
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 15px #ff0000, 0 0 30px #ff0040, 0 0 45px #ff0080;
+    }
+    20%, 24%, 55% {
+        opacity: 0.3;
+        text-shadow: none;
+    }
+}
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+
+    background:
+    radial-gradient(ellipse at 40% 60%, rgba(255, 80, 0, 0.18), transparent 65%),
+    radial-gradient(ellipse at 70% 40%, rgba(255, 50, 0, 0.22), transparent 70%),
+    radial-gradient(ellipse at 30% 80%, rgba(255, 20, 0, 0.28), transparent 60%);
+    background-size: 280% 280%, 260% 260%, 320% 320%;
+    filter: blur(18px);
+    mix-blend-mode: screen;
+    animation: smokeDrift 45s ease-in-out infinite;
+    will-change: background-position; 
+    /*transform: translate3d(0,0,0);
+    animation: smokeDrift 80s linear infinite;
+    will-change: transform;*/
+}
+@keyframes smokeDrift {
+    0% { background-position: 0% 0%, 50% 100%, 80% 20%;}
+    50% { background-position: 100% 80%, 40% 0%, 10% 90%;}
+    100% { background-position: 0% 0%, 50% 100%, 80% 20%;}
+    /*from { transform: translate3d(0%, 0%, 0); }
+    to { transform: translate3d(-10%, -10%, 0);}*/
+}
+/*@media (prefers-reduced-motion: reduce) {
+    body::before { animation: none; opacity: 0.4;}
+}*/
+
+
+/*
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none; 
+}
+body::before {
+    background: radial-gradient(circle at 20% 20%, rgba(255, 0, 0, 0.15), transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(255, 60, 0, 0.1), transparent 70%),
+    radial-gradient(circle at 50% 100%, rgba(255, 150, 0, 0.05), transparent 80%);
+    background-size: 300% 300%;
+    animation: smokeMove 40s linear infinite;
+    filter: blur(60px);
+}
+body::after {
+    background: radial-gradient(circle at center, rgba(255, 0, 0, 0.08), transparent 70%);
+    mix-blend-mode: screen;
+}
+@keyframes smokeMove {
+    0% {background-position: 0% 0%; }
+    50% {background-position: 100% 100%; }
+    100% {background-position: 0% 0%; }
+} 
+*/
