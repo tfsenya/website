@@ -1,6 +1,7 @@
 html { scroll-behavior: smooth;
     scroll-padding-top: 100px;
 }
+
 body {
     background-color: #0a0000;
     background: linear-gradient(to bottom, #000, #1a0000, #0a0000);
@@ -8,7 +9,7 @@ body {
     color: #f8f8f8;
     font-family: "Trebuchet MS", sans-serif;
     line-height: 1.6;
-    z-index: 0;
+    z-index: 1;
     position: relative;
 }
 header {
@@ -19,7 +20,7 @@ header {
     position: sticky;
     top: 0;
     backdrop-filter: blur(2px);
-    z-index: 2;
+    z-index: 3;
 }
 header h1 {
     color: #ff1a1a;
@@ -43,7 +44,7 @@ footer {
     padding: 2rem;
     border-top: 1px solid #330000;
     color: #999;
-    z-index: 2;
+    z-index: 3;
 }
 #LIMBO {
     background: linear-gradient(to bottom, #050000, #200000);
@@ -72,6 +73,44 @@ footer {
 #TREACHERY {
     background: linear-gradient(to bottom, #e60000, #ffbb00);
 }
+#backToTop {
+    position: fixed;
+    right: 20px;
+    bottom: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 1px solid #660000;
+    background: radial-gradient(circle at 60% 40%, #330000, #1a0000);
+    color: #ff4d4d;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(8px);
+    transition: opacity .25s ease, transform .25s ease, box-shadow .2s ease;
+    z-index: 3;
+}
+#backToTop.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+#backToTop:hover,
+#backToTop:focus {
+    outline: none;
+    box-shadow: 0 0 14px #ff000088, 0 0 28px #ff000044;
+    color: #fff;
+}
+@media (prefers-reduced-motion: reduce) {
+    #backToTop {transition: none;}
+}
+@keyframes flameGlow {
+    0%, 100% { text-shadow: 0 0 6px #ff000066, 0 0 18px #ff6600aa;}
+    50% { text-shadow: 0 0 24px #ff3300cc, 0 0 24px #ff9900cc;}
+}
+#backToTop.show {
+    animation: flameGlow 2.5s ease-in-out infinite;
+}
 nav ul{
     list-style: none;
     padding: 0;
@@ -90,6 +129,27 @@ nav a {
     transition: color .2s ease, text-shadow .2s ease, transform .15s ease;
     
 }
+
+@keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 15px #ff0000, 0 0 30px #ff0040, 0 0 45px #ff0080;
+    }
+    20%, 24%, 55% {
+        opacity: 0.3;
+        text-shadow: none;
+    }
+}
+
+/*#flameCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+    */
+
+/*----------SMOKE----------*/
 nav a:hover{
     color: #fff;
     text-shadow: 0 0 12px #ff0000cc, 0 0 24px #ff000066;
@@ -109,22 +169,12 @@ body::after {
   pointer-events: none;
 }
 
-@keyframes flicker {
-    0%, 18%, 22%, 25%, 53%, 57%, 100% {
-        opacity: 1;
-        text-shadow: 0 0 15px #ff0000, 0 0 30px #ff0040, 0 0 45px #ff0080;
-    }
-    20%, 24%, 55% {
-        opacity: 0.3;
-        text-shadow: none;
-    }
-}
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 1;
+    z-index: 0;
 
     background:
     radial-gradient(ellipse at 40% 60%, rgba(255, 80, 0, 0.18), transparent 65%),
@@ -133,20 +183,21 @@ body::before {
     background-size: 280% 280%, 260% 260%, 320% 320%;
     filter: blur(18px);
     mix-blend-mode: screen;
-    animation: smokeDrift 45s ease-in-out infinite;
+    animation: smokeDrift 25s ease-in-out infinite;
     will-change: background-position; 
-    /*transform: translate3d(0,0,0);
-    animation: smokeDrift 80s linear infinite;
-    will-change: transform;*/
+
 }
 @keyframes smokeDrift {
     0% { background-position: 0% 0%, 50% 100%, 80% 20%;}
     50% { background-position: 100% 80%, 40% 0%, 10% 90%;}
     100% { background-position: 0% 0%, 50% 100%, 80% 20%;}
-    /*from { transform: translate3d(0%, 0%, 0); }
-    to { transform: translate3d(-10%, -10%, 0);}*/
 }
-/*@media (prefers-reduced-motion: reduce) {
+
+
+
+/*NOT USING (SMOKE)
+
+@media (prefers-reduced-motion: reduce) {
     body::before { animation: none; opacity: 0.4;}
 }*/
 
