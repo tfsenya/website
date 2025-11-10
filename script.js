@@ -62,8 +62,6 @@ toggleBackToTop();
 
 
 
-/*FLAMES
-
 // === FLAME PARTICLES =========================================================
 (() => {
   const canvas = document.getElementById('flameCanvas');
@@ -142,7 +140,7 @@ toggleBackToTop();
     last = now;
 
     // fade the canvas slightly for a trail effect (cheap motion blur)
-    ctx.globalCompositeOperation = 'destination-out-over';
+    ctx.globalCompositeOperation = 'destination-out';
     ctx.fillStyle = 'rgba(0,0,0,0.08)';     // stronger fade = shorter trails
     ctx.fillRect(0, 0, canvas.width / dpr, canvas.height / dpr);
     ctx.globalCompositeOperation = 'lighter';
@@ -151,9 +149,10 @@ toggleBackToTop();
     const baseRate = spawnPerSecond + scrollBoost;
     scrollBoost = Math.max(0, scrollBoost - 60 * dt); // decay boost
     spawnAccumulator += baseRate * dt;
-    const center = window.innerWidth * 0.5;          // spawn around center
     while (spawnAccumulator >= 1) {
-      spawn(center + rand(-window.innerWidth * 0.25, window.innerWidth * 0.25));
+      // allow a slight overshoot so edges still get embers
+      const spread = window.innerWidth + 160;
+      spawn(rand(-80, spread - 80));
       spawnAccumulator -= 1;
     }
 
@@ -195,4 +194,3 @@ toggleBackToTop();
   }
   requestAnimationFrame(tick);
 })();
-*/
